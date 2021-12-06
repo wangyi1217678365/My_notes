@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // class Promise {
+    //     constructor (fun) {
+    //         this.state = 'padding'
+    //         this.resolveValue = undefined
+    //         this.rejectValue = undefined
+    //         // 成功存放的数组
+    //         this.onResolvedCallbacks = [];
+    //         // 失败存放法数组
+    //         this.onRejectedCallbacks = [];
+    //         let resolve = (resolveValue) => {
+    //             if (this.state == 'padding') {
+    //                 this.state = 'fulfilled'
+    //                 this.resolveValue = resolveValue
+    //                 this.onResolvedCallbacks.forEach(fn=>fn(resolveValue));
+    //             }
+    //         }
+    //         let reject = (rejectValue) => {
+    //             if (this.state == 'padding') {
+    //                 this.state = 'rejected'
+    //                 this.rejectValue = rejectValue
+    //             }
+    //         }
+    //         fun(resolve, reject)
+    //     }
+    //     then (fun) {
+    //         if (this.state == 'fulfilled') {
+    //             console.log('2222');
+    //             fun(this.resolveValue)
+    //         }
+    //         if (this.state == 'padding') {
+    //             this.onResolvedCallbacks.push(fun)
+    //         }
+    //     }
+    //     catch (fun) {
+    //         fun(this.rejectValue)
+    //     }
+    // }
+    // let data = new Promise((resolve, reject) => {
+    //     setTimeout(() => resolve('1'), 5000)
+    // })
+    // data.then(res => {console.log(111, res);})
+
+const fun1 = () => {
+    console.log(1111);
+}  
+new Promise ((resolve) => {
+    console.log('promise1');
+    resolve(2)
+}).then(res => {
+    console.log(res);
+    new Promise((resolve) => {
+        console.log('promise2');
+        setTimeout(() => {
+            resolve(3)
+        })
+        
+    }).then(res=>{console.log(res);})
+})
+setTimeout(() => {
+    console.log('settime');
+})
+fun1()
+</script>
+</html>
