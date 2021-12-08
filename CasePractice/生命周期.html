@@ -7,9 +7,29 @@
     <title>Document</title>
 </head>
 <body>
+    <div style="height: 2000px;"></div>
     
 </body>
 <script>
+    let funs = throttle(scrollFun, 5000)
+	// 监听页面滚动:  
+    window.addEventListener('scroll', funs)
+    function scrollFun () {
+        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+　　    console.log('滚动条位置：' + scrollTop);
+    }
+    // 节流函数封装: 
+    function throttle(fun, delay) {
+        let flag = null
+        return  function () {
+            if (flag) return
+            flag = setTimeout(() => {
+                fun(...arguments)
+              	clearTimeout(flag)
+                flag = null
+            }, delay) 
+        }
+    }
     // class Promise {
     //     constructor (fun) {
     //         this.state = 'padding'
@@ -52,25 +72,25 @@
     // })
     // data.then(res => {console.log(111, res);})
 
-const fun1 = () => {
-    console.log(1111);
-}  
-new Promise ((resolve) => {
-    console.log('promise1');
-    resolve(2)
-}).then(res => {
-    console.log(res);
-    new Promise((resolve) => {
-        console.log('promise2');
-        setTimeout(() => {
-            resolve(3)
-        })
+// const fun1 = () => {
+//     console.log(1111);
+// }  
+// new Promise ((resolve) => {
+//     console.log('promise1');
+//     resolve(2)
+// }).then(res => {
+//     console.log(res);
+//     new Promise((resolve) => {
+//         console.log('promise2');
+//         setTimeout(() => {
+//             resolve(3)
+//         })
         
-    }).then(res=>{console.log(res);})
-})
-setTimeout(() => {
-    console.log('settime');
-})
-fun1()
+//     }).then(res=>{console.log(res);})
+// })
+// setTimeout(() => {
+//     console.log('settime');
+// })
+// fun1()
 </script>
 </html>
